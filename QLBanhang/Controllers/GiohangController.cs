@@ -107,7 +107,7 @@ namespace QLBanhang.Controllers
                 tongtien += item.SoLuong * (int)item.DonGia;
             }
 
-            sMsg += "<tr><th_colspan='>Tõng cộng:"
+            sMsg += "<tr><th_colspan='5'>Tõng cộng:"
                + string.Format("{0:#,###}", tongtien) + "</th></tr></table>";
             MailMessage mail = new MailMessage("anhpro12anh@gmail.com", Email, "thong tin đơn hàng", sMsg);
             SmtpClient client = new SmtpClient("smtp. gmail.com", 587);
