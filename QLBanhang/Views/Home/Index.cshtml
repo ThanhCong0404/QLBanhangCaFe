@@ -5,45 +5,50 @@
 <link rel="stylesheet" href="~/Content/PagedList.css" />
 @{
     ViewBag.Title = "Home Page";
-   
+
 }
 @using (Html.BeginForm())
 {
     <p></p>
+ 
     <div class="form-group form-inline">
-        Tìm sản phẩm: @Html.TextBox("SearchString","", new {@class="form-control"})
-        <input type="submit" class="btn btn-default" value="Search" />
+        <h4 style="color:white" > Tìm Sản Phẩm   :</h4>
+        <a>
+            @Html.TextBox("SearchString", "", new { @class = "form-control" })
+        </a>
+        <input type="submit" class="btn btn-default" style="margin:10px" value="Search" />
     </div>
- }
+}
 
 
 <div class="row">
     @foreach (var item in Model)
     {
-    <div class="col-lg-3" style="background-color:darkslategray;margin-top:5px;text-align:center;">
-        <h3>@item.TenSP</h3>
-        <img src="~/Content/images/@item.HinhSP" width="100" height="100" />
-        Giá @item.Dongia vnd<br />
-        <br/>
-        <div>
-             <a class="btn btn-info btn-sm" href="@Url.Action("AddToCart","GioHang",new { MaSP = item.MaSP})">
-            Thêm Vào Giỏ hàng
-        </a>
-        <a class="btn btn-link btn-sm" style="color:ghostwhite" href="@Url.Action("Details", "SanPhams", new {id = item.MaSP})">
-            Xem Chi Tiết
-        </a>
+        <div class="col-lg-3" style="background-color:#6c757d" ;margin-top:5px;text-align:center;">
+            <h3>@item.TenSP</h3>
+            <img src="~/Content/images/@item.HinhSP" width="100" height="100" />
+            <br />
+            <h4> Giá : @item.Dongia vnđ</h4>
+
+            <div>
+                <a class="btn btn-info btn-sm" href="@Url.Action("AddToCart","GioHang",new { MaSP = item.MaSP})">
+                    Thêm Vào Giỏ hàng
+                </a>
+                <a class="btn btn-link btn-sm" style="color:ghostwhite" href="@Url.Action("Details", "SanPhams", new {id = item.MaSP})">
+                    Xem Chi Tiết
+                </a>
+            </div>
+
         </div>
-       
-    </div>
     }
 </div>
 <div>
     Trang @(Model.PageCount<Model.PageNumber?0:Model.PageNumber)/@Model.PageCount
-    @Html.PagedListPager(Model, Page=> Url.Action("Index",
+    @Html.PagedListPager(Model, Page => Url.Action("Index",
     new
     {
         Page,
-        currentFilter =  ViewBag.CurrentFilter
+        currentFilter = ViewBag.CurrentFilter
     }))
-    
+
 </div>

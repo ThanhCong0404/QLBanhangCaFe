@@ -1,6 +1,7 @@
 ﻿@model QLBanhang.Models.Nhanvien
 
 @{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Delete";
 }
 
@@ -49,7 +50,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <input type="submit" value="Delete" class="btn btn-secondary" /> |
             @Html.ActionLink("Back to List", "Index")
         </div>
     }
