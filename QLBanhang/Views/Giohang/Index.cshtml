@@ -1,0 +1,108 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var ds = ViewBag.DanhSach;
+
+
+    int Tongtientam = 0;
+    int TongSoluong = 0;
+    if (ds != null)
+    {
+        foreach (var i in ds)
+        {
+            Tongtientam += i.ThanhTien;
+            TongSoluong += i.SoLuong;
+        }
+
+    }
+
+}
+
+
+<h2>@ViewBag.Title</h2>
+@if (ds == null)
+{
+    <h3 class="text-info text-center">
+        Chưa có sản phẩm trong giỏ hàng
+    </h3>
+}
+else
+{
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>
+                            Mã Hàng
+                        </th>
+                        <th>
+                            Tên Hàng
+                        </th>
+                        <th>
+                            Số Lượng
+                        </th>
+                        <th>
+                            Đơn Giá
+                        </th>
+                        <th>
+                            Thành Tiền
+                        </th>
+                        <th>
+
+                        </th>
+                    </tr>
+                    @{
+                        var sl = 0;
+                        var tongTien = 0;
+                    }
+                    @foreach (var item in ds)
+                    {
+
+                        <tr>
+                            <td class="text-center">@item.MaSP</td>
+                            <td> <a target="_blank" href="@Url.Action("Details","SanPhams",new {id= item.MaSP })">@item.TenSP</a></td>
+                            <td>
+                                <form action="@Url.Action("Update")" method="get">
+                                    <input type="hidden" name="MaSP" value="@item.MaSP" />
+                                    <input type="number" style="background-color: #33333370; font-size: larger; " min="1" name="txtSoLuong" value="@item.SoLuong" />
+                                    <button type="submit" class="btn btn-success btn-sm">Cập Nhật</button>
+                                </form>
+                            </td>
+                            <td>@item.DonGia.ToString() VNd</td>
+                            <td>@item.ThanhTien.ToString() VNd</td>
+                            <td>
+                                <a href="@Url.Action("DelCartItem",new { MaSP = item.MaSP })" onclick="return confirm('Xoa San Phẩm Này ?');" class="btn btn-danger btn-sm">Xóa</a>
+                            </td>
+                        </tr>
+                    }
+                    <tr>
+                        <td></td>
+                        <td class="text-right">Tông Số Lượng</td>
+                        <td>@TongSoluong</td>
+                        <td class="text-right">Tổng Thành Tiền</td>
+                        <td>@Tongtientam VNĐ</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">
+                           
+                            <form action="@Url.Action("Order", "Giohang",new { @ViewBag.toEmail})" method="get">
+
+                                Thông tin Đặt Hàng - Email : <input type="email" value="@ViewBag.toEmail" style="background-color: #333; font-size: larger; " name="Email" />
+                                -Điện Thoại: <input type="text" style="background-color: #333; font-size: larger; "  name="phone" />
+                                <input type="submit" value="Đặt Hàng" class="btn btn-success btn-sm" />
+                                <a class="btn btn-success btn-sm" href="@Url.Action("Index","Home")">
+                                    Tiếp Tục Đặt Hàng
+                                </a>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+}

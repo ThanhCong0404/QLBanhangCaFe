@@ -1,0 +1,52 @@
+﻿
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="color:burlywood">Login</h2>
+
+
+@if (ViewBag.error != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.error");
+            };
+    </script>
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+
+    <div class="form-horizontal">
+
+        <div class="form-group">
+            <h4 style="color:antiquewhite">Email Đăng Nhập :</h4>
+            <div class="col-md-10">
+                <input type="Email" id="Email" name="Email" style="width:100%;color:darkslategrey" required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <h4 style="color:antiquewhite">Mật Khẩu Đăng Nhập :</h4>
+            <div class="col-md-10">
+                <input type="password" name="MatKhau" style="width:100%;color:darkslategrey" required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Đăng Nhập" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -1,0 +1,65 @@
+﻿@model IEnumerable<QLBanhang.Models.HoaDon>
+
+@{
+    ViewBag.Title = "Hóa Đơn Bán Hang";
+}
+
+<h2 style="color:navajowhite">Danh mục hóa Đơn</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Mã HĐ
+        </th>
+        <th>
+            Ngay Lap HD
+        </th>
+        <th>
+            Ngay Giao Hang
+        </th>
+        <th>
+            Tên Khách Hàng
+        </th>
+        <th>
+            Nhân Viên Bán Hàng
+        </th>
+        <th>
+            Tổng Tiền 
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        <a href="@Url.Action("Index","CTHDs", new {MaHD = item.MaHD })">
+            @Html.DisplayFor(ModelItem => item.MaHD)
+        </a>
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.NgayLapHD)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.NgayGiaoHang)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.KhachHang.TenKH)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Nhanvien.HoNV)
+        @Html.DisplayFor(modelItem => item.Nhanvien.Ten)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TongTien)
+    </td>
+    <td>
+        <button type="button" onclick="location.href='@Url.Action("XacNhanDonHang", "HoaDons", new {item.MaHD} )'" class="btn btn-warning">Xác Nhận Đơn</button>
+        @Html.ActionLink("Edit", "Edit", new { id = item.MaHD }) |
+        @Html.ActionLink("Xem chi tiết", "Details", new { id = item.MaHD }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.MaHD })
+    </td>
+</tr>
+}
+
+</table>

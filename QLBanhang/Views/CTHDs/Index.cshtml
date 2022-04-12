@@ -1,0 +1,95 @@
+﻿    @model IEnumerable<QLBanhang.Models.CTHD>
+
+@{
+    ViewBag.Title = "Chi tiết hóa đơn";
+}
+
+<h2>Chi tiết hóa đơn</h2>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Soluong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DongiaBan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Giamgia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoaDon.MaKH)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SanPham.TenSP)
+        </th>
+        <th></th>
+    </tr>*@
+
+@foreach (var m in ViewBag.Main) {
+    <h3> Số hóa đơn: @m.hoaDons.MaHD</h3>
+    <m3>Ten khách hàng:@m.khachhang.TenKH</m3>
+    <table class="table table-striped">
+        <tr>
+            <th>Số TT</th>
+            <th>Tên SP</th>
+            <th>Đơn vị tính</th>
+            <th>Số lượng</th>
+            <th>Đơn giá </th>
+            <th>Thành tiền</th>
+        </tr>
+        @{ 
+            double tongtien = 0;
+            int i = 0;
+        }
+        @foreach (var item in ViewBag.Sub)
+        {
+            i++;
+            tongtien += (Convert.ToDouble(@item.CTHD.soluong) * Convert.ToDouble(@item.CTHD.DongiaBna));
+            <tr>
+                  <td>@i</td>
+                  <td>@item.Sanpham.TenSP</td>
+                  <td>@item.Sanpham.Donvitinh</td>
+                  <td>@item.CTHD.Soluong</td>
+                  <td>@string.Format("{0:0,##0}",item.CTHD.Dongiaban)</td>
+                  <td>@string.Format("{0:0,##0}", item.Thanhtien.Dongiaban)</td>
+
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Tong Tien:</td>
+                <td><text>@string.Format("{0:0,##0}",tongtien)</text></td>
+            </tr>
+        }
+    </table>
+    @*<tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Soluong)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DongiaBan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Giamgia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoaDon.MaKH)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SanPham.TenSP)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>*@
+}
+
+

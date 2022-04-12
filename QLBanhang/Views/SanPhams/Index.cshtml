@@ -1,0 +1,62 @@
+﻿@model IEnumerable<QLBanhang.Models.SanPham>
+@using QLBanhang.Models
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>DANH MỤC SẢN PHẨM</h2>
+
+<p>
+    @Html.ActionLink("Thêm sản phẩm", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Tên Sản Phẩm
+        </th>
+        <th>
+            Đơn Vị TÍnh
+        </th>
+        <th>
+            Đơn Giá
+        </th>
+        <th>
+            Loại Sản Phẩm
+        </th>
+        <th>
+            Hình
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.TenSP)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Donvitinh)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Dongia)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.LoaiSP.TenLoaiSP)
+    </td>
+    <td>
+        @*@Html.DisplayFor(modelItem => item.HinhSP)*@
+        @{var anh = "/Content/Images/" + item.HinhSP;}
+        <img src="@anh" width="100" height="100" />
+    </td>
+
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.MaSP }) |
+        @Html.ActionLink("Details", "Details", new { id = item.MaSP }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.MaSP })
+    </td>
+</tr>
+}
+
+</table>
