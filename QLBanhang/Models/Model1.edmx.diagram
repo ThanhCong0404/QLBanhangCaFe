@@ -16,6 +16,7 @@
         <AssociationConnector Association="qlbanhangModel.FK_HoaDon_KhachHang" ManuallyRouted="false" />
         <AssociationConnector Association="qlbanhangModel.FK_HoaDon_Nhanvien" ManuallyRouted="false" />
         <AssociationConnector Association="qlbanhangModel.FK_SanPham_LoaiSP" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="qlbanhangModel.sysdiagram" Width="1.5" PointX="3.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

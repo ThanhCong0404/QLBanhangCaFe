@@ -22,7 +22,7 @@ namespace QLBanhang.Controllers
                 int pageSize = 8;
                 int pageNumber = (page ?? 1);
                 page = 1;
-                var SanPham = db.SanPhams.Where(x => x.TenSP.ToUpper().Contains(SearchString.ToUpper())).ToList();
+                var SanPham = db.SanPhams.Where(x => x.TenSP.ToUpper().Contains(SearchString.ToUpper()) && x.SoLuong > 0 ).ToList();
                 return View(SanPham.ToPagedList(pageNumber, pageSize));
             }
             else
@@ -32,7 +32,7 @@ namespace QLBanhang.Controllers
             {
                 int pageSize = 8;
                 int pageNumber = (page ?? 1);
-                var sanPhams = db.SanPhams.ToList();
+                var sanPhams = db.SanPhams.Where(m=> m.SoLuong >0 ).ToList();
                 //var sanPhams = db.SanPham.Include(s => s.LoaiSP).Where(x => x.MaLoaiSP == maloaisp).OrderBy(x =>x.TenSP);
                 //phai oder tr skipp
                 return View(sanPhams.ToPagedList(pageNumber,pageSize));
@@ -42,7 +42,7 @@ namespace QLBanhang.Controllers
             {
                 int pageSize = 8;
                 int pageNumber = (page ?? 1);
-                var sanPhams = db.SanPhams.Where(x => x.MaLoaiSP == maloaisp).ToList();
+                var sanPhams = db.SanPhams.Where(x => x.MaLoaiSP == maloaisp && x.SoLuong > 0).ToList();
 
                 return View(sanPhams.ToPagedList(pageNumber, pageSize));
             }    

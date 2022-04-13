@@ -53,19 +53,19 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                            Tasks
+                            Tổng đơn hàng đã bán
                         </div>
                         <div class="row no-gutters align-items-center">
                             <div class="col-auto">
-                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">@Model.TongDonHangDaBan</div>
                             </div>
-                            <div class="col">
+                            @*<div class="col">
                                 <div class="progress progress-sm mr-2">
                                     <div class="progress-bar bg-info" role="progressbar"
                                          style="width: 50%" aria-valuenow="50" aria-valuemin="0"
                                          aria-valuemax="100"></div>
                                 </div>
-                            </div>
+                            </div>*@
                         </div>
                     </div>
                     <div class="col-auto">
@@ -83,12 +83,12 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                            Pending Requests
+                            Tonge số lượng sản phẩm đã bán
                         </div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.SoLuongSanPhamDaBan</div>
                     </div>
                     <div class="col-auto">
-                        <i class="fas fa-comments fa-2x text-gray-300"></i>
+                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
                     </div>
                 </div>
             </div>
@@ -98,22 +98,30 @@
     <div class="container">
         <div class="col-lg-6 mb-4">
             <a href="/NhanViens/" class="card bg-info text-white shadow">
-                <div class="card-body" >
-                     Quản Lý Danh Sách Nhân Viên
+                <div class="card-body">
+                    Quản Lý Danh Sách Nhân Viên
                     <div class="text-white-50 small"></div>
                 </div>
             </a>
         </div>
-        
+
 
         <div class="col-lg-6 mb-4" style="height:100%">
             <a href="/LoaiSPs/Index/" class="card bg-warning text-white shadow">
                 <div class="card-body">
-                     Quản Lý Loại Sản Phẩm 
+                    Quản Lý Loại Sản Phẩm
                     <div class="text-white-50 small"></div>
                 </div>
             </a>
         </div>
-       
+        <div class="col-lg-6 mb-4" style="height:100%">
+            <a href="/LoaiSPs/Index/" class="card badge-secondary text-white shadow">
+                <div class="card-body">
+                    Thống Kê Sản Phẩm Bán Được 
+                    <div class="text-white-50 small"></div>
+                </div>
+            </a>
+        </div>
+
     </div>
 

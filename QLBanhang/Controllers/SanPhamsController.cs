@@ -22,7 +22,7 @@ namespace QLBanhang.Controllers
         // GET: SanPhams
         public ActionResult Index()
         {
-            var sanPham = Db.SanPhams.ToList();
+            var sanPham = Db.SanPhams.Where(m=> m.SoLuong > 0).ToList();
             return View(sanPham.ToList());
         }
 
@@ -53,7 +53,7 @@ namespace QLBanhang.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaSP,TenSP,Donvitinh,Dongia,MaLoaiSP,HinhSP")] SanPham sanPham ,HttpPostedFileBase HinhSP)
+        public ActionResult Create([Bind(Include = "MaSP,TenSP,Dongia,MaLoaiSP,HinhSP,SoLuong")] SanPham sanPham ,HttpPostedFileBase HinhSP)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +94,7 @@ namespace QLBanhang.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaSP,TenSP,Donvitinh,Dongia,MaLoaiSP,HinhSP")] SanPham sanPham,
+        public ActionResult Edit([Bind(Include = "MaSP,TenSP,SoLuong,MaLoaiSP,HinhSP,DonGia")] SanPham sanPham,
             HttpPostedFileBase HinhUpload, string HinhSP)
         {
             if (ModelState.IsValid)
@@ -141,7 +141,11 @@ namespace QLBanhang.Controllers
             SanPham sanPham = Db.SanPhams.FirstOrDefault(s=>s.MaSP == id);
             Db.SanPhams.Remove(sanPham);
             Db.SaveChanges();
-            System.IO.File.Delete(Server.MapPath("~/Content/images/" + sanPham.HinhSP));
+            if(sanPham.HinhSP != null)
+            {
+                System.IO.File.Delete(Server.MapPath("~/Content/images/" + sanPham.HinhSP));
+
+            }
             return RedirectToAction("Index");
         }
 
