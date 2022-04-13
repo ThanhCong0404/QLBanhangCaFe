@@ -148,9 +148,12 @@
                                         <li><a href="@Url.Action("Logout", "Home")"> LogOut !</a></li>
 
                                     </ul>
+
+                                    <hr />
+
                                     @if (user.isAdmin == true)
                                         {
-                                             <li><a class="btn btn-warning" href="/Admin/">ADMIN</a></li>
+                                             <li><a class="btn btn-warning" style="padding:4px" href="/Admin/">Đến Trang ADMIN</a></li>
                                             
                                         }
                                 </li>

@@ -26,6 +26,7 @@ namespace QLBanhang.Models
         public System.DateTime NgayLapHD { get; set; }
         public System.DateTime NgayGiaoHang { get; set; }
         public Nullable<float> TongTien { get; set; }
+        public string TinhTrangDonHang { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CTHD> CTHDs { get; set; }

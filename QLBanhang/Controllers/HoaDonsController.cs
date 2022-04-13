@@ -141,14 +141,30 @@ namespace QLBanhang.Controllers
             
             if(hd.MaNV==null)
             {
-                hd.MaNV = nv.MaNV;
+                
+
                 var emailKhachHang = db.KhachHangs.Where(k => k.MaKH == hd.MaKH).FirstOrDefault().Email;
                 string sMg = "Đơn hàng có mã đơn " + hd.MaHD.ToString() + " đã được xác nhận . Chúng tôi sẽ giao đến bạn sớm nhất có thể ! ";
                 WebMail.Send(emailKhachHang, "Thông tin đơn đặt hàng", sMg , null, null, null, true, null, null, null, null, null, null);
-
+                hd.TinhTrangDonHang = "Đã xác nhận!";
+                hd.MaNV = nv.MaNV;
                 db.SaveChanges();
             }    
             
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult TuChoiDonHang(int mahd)
+        {
+            var nv = (QLBanhang.Models.Nhanvien)Session["nhanvien"];
+            HoaDon hd = db.HoaDons.FirstOrDefault(s => s.MaHD == mahd);
+
+                var emailKhachHang = db.KhachHangs.Where(k => k.MaKH == hd.MaKH).FirstOrDefault().Email;
+                string sMg = "Đơn hàng có mã đơn " + hd.MaHD.ToString() + " Chưa được xác nhận . Chờ xử lý ! ";
+                WebMail.Send(emailKhachHang, "Thông tin đơn đặt hàng", sMg, null, null, null, true, null, null, null, null, null, null);
+            hd.TinhTrangDonHang = "Chưa Được Xác Nhận";
+                db.SaveChanges();
+
             return RedirectToAction("Index");
         }
     }

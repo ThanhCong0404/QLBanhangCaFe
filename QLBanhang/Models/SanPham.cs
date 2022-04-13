@@ -26,7 +26,7 @@ namespace QLBanhang.Models
         public Nullable<int> MaLoaiSP { get; set; }
         public string HinhSP { get; set; }
         public int SoLuong { get; set; }
-        public Nullable<int> SoLuongDaBan { get; set; }
+        public int SoLuongDaBan { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CTHD> CTHDs { get; set; }

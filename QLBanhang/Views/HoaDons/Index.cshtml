@@ -27,6 +27,10 @@
         <th>
             Tổng Tiền 
         </th>
+        <th>
+            Tình Trạng Đơn Hàng
+        </th>
+        <th></th>
         <th></th>
     </tr>
 
@@ -54,7 +58,15 @@
         @Html.DisplayFor(modelItem => item.TongTien)
     </td>
     <td>
+        @Html.DisplayFor(modelItem => item.TinhTrangDonHang)
+    </td>
+
+    <td>
         <button type="button" onclick="location.href='@Url.Action("XacNhanDonHang", "HoaDons", new {item.MaHD} )'" class="btn btn-warning">Xác Nhận Đơn</button>
+        <button type="button" onclick="location.href='@Url.Action("TuChoiDonHang", "HoaDons", new {item.MaHD} )'" class="btn btn-danger">Từ Chối</button>
+
+    </td>
+    <td>
         @Html.ActionLink("Edit", "Edit", new { id = item.MaHD }) |
         @Html.ActionLink("Xem chi tiết", "Details", new { id = item.MaHD }) |
         @Html.ActionLink("Delete", "Delete", new { id = item.MaHD })

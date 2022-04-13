@@ -26,6 +26,7 @@
           <Property Name="NgayLapHD" Type="datetime" Nullable="false" />
           <Property Name="NgayGiaoHang" Type="datetime" Nullable="false" />
           <Property Name="TongTien" Type="real" />
+          <Property Name="TinhTrangDonHang" Type="nchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="KhachHang">
           <Key>
@@ -69,7 +70,7 @@
           <Property Name="MaLoaiSP" Type="int" />
           <Property Name="HinhSP" Type="nvarchar(max)" />
           <Property Name="SoLuong" Type="int" Nullable="false" />
-          <Property Name="SoLuongDaBan" Type="int" />
+          <Property Name="SoLuongDaBan" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -210,6 +211,7 @@
           <NavigationProperty Name="CTHDs" Relationship="Self.FK_CTHD_HoaDon" FromRole="HoaDon" ToRole="CTHD" />
           <NavigationProperty Name="KhachHang" Relationship="Self.FK_HoaDon_KhachHang" FromRole="HoaDon" ToRole="KhachHang" />
           <NavigationProperty Name="Nhanvien" Relationship="Self.FK_HoaDon_Nhanvien" FromRole="HoaDon" ToRole="Nhanvien" />
+          <Property Name="TinhTrangDonHang" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="KhachHang">
           <Key>
@@ -258,7 +260,7 @@
           <NavigationProperty Name="CTHDs" Relationship="Self.FK_CTHD_SanPham" FromRole="SanPham" ToRole="CTHD" />
           <NavigationProperty Name="LoaiSP" Relationship="Self.FK_SanPham_LoaiSP" FromRole="SanPham" ToRole="LoaiSP" />
           <Property Name="SoLuong" Type="Int32" Nullable="false" />
-          <Property Name="SoLuongDaBan" Type="Int32" />
+          <Property Name="SoLuongDaBan" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FK_CTHD_HoaDon">
           <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="1">
@@ -389,6 +391,7 @@
           <EntitySetMapping Name="HoaDons">
             <EntityTypeMapping TypeName="qlbanhangModel.HoaDon">
               <MappingFragment StoreEntitySet="HoaDon">
+                <ScalarProperty Name="TinhTrangDonHang" ColumnName="TinhTrangDonHang" />
                 <ScalarProperty Name="MaHD" ColumnName="MaHD" />
                 <ScalarProperty Name="MaKH" ColumnName="MaKH" />
                 <ScalarProperty Name="MaNV" ColumnName="MaNV" />

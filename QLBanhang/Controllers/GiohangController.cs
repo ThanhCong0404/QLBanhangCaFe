@@ -150,7 +150,7 @@ namespace QLBanhang.Controllers
                 cthd.MaSP = item.MaSP;
                 cthd.Soluong = int.Parse(item.SoLuong.ToString());
                 cthd.DongiaBan = float.Parse( item.ThanhTien.ToString());
-                db.SanPhams.Where(x => x.MaSP == cthd.MaSP).FirstOrDefault().SoLuongDaBan += cthd.Soluong;
+                db.SanPhams.Where(x => x.MaSP == cthd.MaSP).FirstOrDefault().SoLuongDaBan += (int)cthd.Soluong;
                 db.SanPhams.Where(x => x.MaSP == cthd.MaSP).FirstOrDefault().SoLuong -= (int)cthd.Soluong;
 
 
