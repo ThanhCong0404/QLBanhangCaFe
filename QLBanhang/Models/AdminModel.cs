@@ -9,5 +9,8 @@ namespace QLBanhang.Models
     {
         public double doanhthuthang { get; set; }
         public double doanhthutong { get; set; }
+        public int TongDonHangDaBan { get; set; }
+
+        public int SoLuongSanPhamDaBan { get; set; }
     }
 }

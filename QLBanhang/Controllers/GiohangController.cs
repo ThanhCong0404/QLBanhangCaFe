@@ -15,12 +15,14 @@ namespace QLBanhang.Controllers
     {
         private qlbanhangEntities db = new qlbanhangEntities();
         private readonly object hang;
+        public static string alert = null;
 
         // GET: Giohang
         public ActionResult Index()
         {
             List<Cartltem> giohang = Session["giohang"] as List<Cartltem>;
             ViewBag.DanhSach = giohang;
+            ViewBag.alert = alert;
             if(Session["user"] != null)
             {
                 var toEmail = (Models.KhachHang)Session["user"];
@@ -61,10 +63,19 @@ namespace QLBanhang.Controllers
 
         public RedirectToRouteResult Update(int MaSP, int txtSoLuong)
         {
+            alert = null;
+
             List<Cartltem> giohang = Session["giohang"] as List<Cartltem>;
             Cartltem item = giohang.FirstOrDefault(m => m.MaSP == MaSP);
+
             if (item != null)
             {
+                if((Int32)txtSoLuong > db.SanPhams.Where(x => x.MaSP == item.MaSP).FirstOrDefault().SoLuong)
+                {
+                    alert = "So Luong San Pham Con Lai Khong Du ";
+                    return RedirectToAction("Index");
+                }    
+
                 item.SoLuong = txtSoLuong;
                 Session["giohang"] = giohang;
             }
@@ -83,6 +94,8 @@ namespace QLBanhang.Controllers
         }
         public ActionResult Order (string Email)
         {
+            alert = null;
+
             if(Session["user"] == null)
             {
                return Redirect("/Home/Login");
@@ -120,7 +133,6 @@ namespace QLBanhang.Controllers
 
             WebMail.Send(Email, "Thông tin đơn đặt hàng", sMsg, null, null, null, true, null, null, null, null,null,null);
 
-            Response.Write("<script>alert('Oder sucecssfully!')</script>");
 
             HoaDon hoadon = new HoaDon();
             var kh = (QLBanhang.Models.KhachHang)Session["user"];
@@ -136,13 +148,19 @@ namespace QLBanhang.Controllers
 
                 cthd.MaHD = db.HoaDons.FirstOrDefault(m=> m.MaHD == hoadon.MaHD).MaHD;
                 cthd.MaSP = item.MaSP;
-                cthd.Soluong = Int16.Parse(item.SoLuong.ToString());
+                cthd.Soluong = int.Parse(item.SoLuong.ToString());
                 cthd.DongiaBan = float.Parse( item.ThanhTien.ToString());
+                db.SanPhams.Where(x => x.MaSP == cthd.MaSP).FirstOrDefault().SoLuongDaBan += cthd.Soluong;
+                db.SanPhams.Where(x => x.MaSP == cthd.MaSP).FirstOrDefault().SoLuong -= (int)cthd.Soluong;
+
+
+                Session["giohang"] = null;
+                alert = "Dat Hang Thanh Cong ! Successfull";
             }
             db.CTHDs.Add(cthd);
             db.SaveChanges();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index");
 
         }
     }

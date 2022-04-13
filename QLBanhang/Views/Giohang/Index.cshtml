@@ -20,11 +20,24 @@
 }
 
 
-<h2>@ViewBag.Title</h2>
+@if (ViewBag.alert != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.alert");
+            };
+    </script>
+}
+
+
+<h2></h2>
+
 @if (ds == null)
 {
     <h3 class="text-info text-center">
-        Chưa có sản phẩm trong giỏ hàng
+        <div class="alert alert-info" style="color:red ; bold" role="alert">
+            Chưa có sản phẩm trong giỏ hàng
+        </div>
     </h3>
 }
 else
@@ -87,11 +100,11 @@ else
                     </tr>
                     <tr>
                         <td colspan="6">
-                           
+
                             <form action="@Url.Action("Order", "Giohang",new { @ViewBag.toEmail})" method="get">
 
                                 Thông tin Đặt Hàng - Email : <input type="email" value="@ViewBag.toEmail" style="background-color: #333; font-size: larger; " name="Email" />
-                                -Điện Thoại: <input type="text" style="background-color: #333; font-size: larger; "  name="phone" />
+                                -Điện Thoại: <input type="text" style="background-color: #333; font-size: larger; " name="phone" />
                                 <input type="submit" value="Đặt Hàng" class="btn btn-success btn-sm" />
                                 <a class="btn btn-success btn-sm" href="@Url.Action("Index","Home")">
                                     Tiếp Tục Đặt Hàng

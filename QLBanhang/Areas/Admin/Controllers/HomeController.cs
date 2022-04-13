@@ -30,9 +30,24 @@ namespace QLBanhang.Areas.Admin.Controllers
             foreach(var item in db.HoaDons.ToList())
             {
                 model.doanhthutong += (double)item.TongTien;
-            }    
+                model.TongDonHangDaBan += 1;
 
+            }
+
+            int soluongsanphamban = 0;
+            foreach(var item in db.CTHDs.ToList())
+            {
+                 soluongsanphamban += (int)item.Soluong;
+            }
+            model.SoLuongSanPhamDaBan = soluongsanphamban;
             return View(model);
+        }
+
+        public ActionResult ThongKe()
+        {
+
+
+            return View();
         }
     }
 }
